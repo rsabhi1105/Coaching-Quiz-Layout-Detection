@@ -1,0 +1,17 @@
+books-layout-detection kaise chalta hai
+
+cd books-layout-detection
+python -m venv .venv                                    # sirf pehli baar
+.venv/Scripts/python -m pip install -r requirements.txt # sirf pehli baar
+
+Phir rozana ke commands:
+
+# Book upload karni hai (DB me jaati hai) — browser me form khulta hai
+.venv/Scripts/python -m books_layout.cli upload
+
+# Sirf parse karke dekhna hai, DB touch nahi
+python detection_runner.py                  # file picker + HTML viewer khulta hai
+
+# Health checks
+.venv/Scripts/python -m books_layout.cli check-db        # DB connection
+.venv/Scripts/python -m books_layout.cli check-platform  # Django models match kar rahe hain

@@ -1,0 +1,25 @@
+# Local-only ingestion tool. PyMuPDF is AGPL-3.0: keep it in this offline tool, never in the served backend.
+pymupdf>=1.24,<2
+psycopg[binary]>=3.2,<4
+python-dotenv>=1.0,<2
+
+# ── The backend's Django, because this tool writes through its models ──
+# books_layout/platform.py starts CoachingQuiz's Django and uses apps.books.models
+# directly, so everything config.settings lists in INSTALLED_APPS has to import here too.
+#
+# These mirror CoachingQuiz-Ai-Plateform-v2/django-service/requirements.txt. They are
+# copied rather than included with `-r` because that file pins psycopg2-binary==2.9.9,
+# which has no wheel for Python 3.13+ and fails to build — the backend's own venv runs
+# 2.9.13. Floors are used here so the same thing cannot happen again.
+#
+# If the backend changes a pin, change it here too and run:
+#   .venv/Scripts/python -m books_layout.cli check-platform
+Django>=5.0,<5.1
+djangorestframework>=3.14,<4
+django-cors-headers>=4.3,<5
+drf-spectacular>=0.28,<1
+psycopg2-binary>=2.9.13
+bcrypt>=4.1
+PyJWT>=2.8
+Pillow>=12.1
+redis>=5.0
